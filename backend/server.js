@@ -1,6 +1,6 @@
 const http = require("node:http");
-const hostName = "127.0.0.1";
-const port = 3000;
+const hostName = "localhost";
+const port = 5000;
 
 const server = http.createServer((req, res) => {
   res.writeHead(200, { "Content-Type": "text/html" });

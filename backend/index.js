@@ -20,8 +20,10 @@ app.get("/", function (req, res) {
   res.render("pages/auth");
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => console.log("App listening on port " + port));
+const port = process.env.PORT || 5000;
+app.listen(port, () =>
+  console.log(`Server running at http://localhost:${port}/`)
+);
 
 /*  PASSPORT SETUP  */
 
@@ -61,7 +63,7 @@ passport.use(
       userProfile = profile;
       localStorage.setItem("UserData", userProfile);
       console.log("__userProfile", userProfile);
-      // return done(null, userProfile);
+      return done(null, userProfile);
     }
   )
 );
@@ -77,12 +79,12 @@ app.get(
   }
 );
 
-// app.get(
-//   "/auth/google/callback",
-//   passport.authenticate("google", { failureRedirect: "/error" }),
-//   function (req, res) {
-//     console.log("__res2", res);
-//     // Successful authentication, redirect success.
-//     res.redirect("/success");
-//   }
-// );
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", { failureRedirect: "/error" }),
+  function (req, res) {
+    console.log("__res2", res);
+    // Successful authentication, redirect success.
+    res.redirect("/success");
+  }
+);
